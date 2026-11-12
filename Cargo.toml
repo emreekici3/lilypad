@@ -1,0 +1,23 @@
+[package]
+name = "lilypad"
+version = "0.1.0"
+edition = "2024"
+description = "A floating window manager for macOS with smooth animations."
+license = "MIT"
+
+[[bin]]
+name = "lily"
+path = "src/main.rs"
+
+[dependencies]
+log = "0.4"
+env_logger = "0.11"
+regex = "1"
+
+[lints.rust]
+# `--cfg lily_check_macos` type-checks the macOS backend on other hosts.
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(lily_check_macos)'] }
+
+[profile.release]
+lto = true
+codegen-units = 1

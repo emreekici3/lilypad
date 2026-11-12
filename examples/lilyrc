@@ -1,0 +1,90 @@
+#!/bin/sh
+# lily config, run by `lily start` (and again by `lily reload`).
+# Copy to ~/.config/lilypad/lilyrc. Every line is an ordinary lily command,
+# so you can also try them live in a terminal first.
+
+# Space windows keep from the edges of the display and from each other.
+lily config gap 8
+
+# How far `move` and `resize` go by default, in points.
+lily config step 40
+
+# Windows slide into place (on) or jump there (off).
+lily config animation on
+
+# A ring around the focused window.
+lily config border off
+lily config border_color 8aa9f8
+lily config border_width 2
+lily config border_radius 12
+
+# The window under the pointer gets the focus; focusing from the keyboard
+# brings the pointer along.
+lily config focus_follows_mouse off
+lily config mouse_follows_focus off
+
+# Tell SketchyBar about Space and focus changes.
+lily config sketchybar off
+
+# Hold this key and drag anywhere on a window: left moves it, right resizes
+# it from the nearest corner. alt, cmd, ctrl, shift, fn, or off.
+lily config mouse_modifier alt
+lily config mouse_action1 move
+lily config mouse_action2 resize
+
+# Where apps' new windows go, as grid cells. Use the names `lily query`
+# shows; /regex/ matches by pattern.
+# lily rule grid 1:2:0:0:1:1 Zed
+# lily rule grid 2:2:1:1:1:1 Terminal
+# lily rule grid 6:6:1:1:4:4 /Mail|Messages/
+
+# Keyboard shortcuts.
+lily bind 'alt - h : lily focus left'
+lily bind 'alt - j : lily focus down'
+lily bind 'alt - k : lily focus up'
+lily bind 'alt - l : lily focus right'
+
+lily bind 'alt + shift - h : lily move left'
+lily bind 'alt + shift - j : lily move down'
+lily bind 'alt + shift - k : lily move up'
+lily bind 'alt + shift - l : lily move right'
+
+# Right and down grow, left and up shrink; the top-left corner stays.
+lily bind 'alt + ctrl - h : lily resize left'
+lily bind 'alt + ctrl - j : lily resize down'
+lily bind 'alt + ctrl - k : lily resize up'
+lily bind 'alt + ctrl - l : lily resize right'
+
+lily bind 'alt + cmd - h : lily snap left'
+lily bind 'alt + cmd - j : lily snap down'
+lily bind 'alt + cmd - k : lily snap up'
+lily bind 'alt + cmd - l : lily snap right'
+
+lily bind 'alt - c : lily place center 70%'
+lily bind 'alt - left : lily place left'
+lily bind 'alt - right : lily place right'
+lily bind 'alt - up : lily place top'
+lily bind 'alt - down : lily place bottom'
+lily bind 'alt - m : lily place max'
+lily bind 'alt + shift - q : lily close'
+
+# Spaces: show one, or send the focused window there and go with it.
+lily bind 'alt - 1 : lily space 1'
+lily bind 'alt - 2 : lily space 2'
+lily bind 'alt - 3 : lily space 3'
+lily bind 'alt - tab : lily space recent'
+lily bind 'alt + shift - 1 : lily send 1'
+lily bind 'alt + shift - 2 : lily send 2'
+lily bind 'alt + shift - 3 : lily send 3'
+
+# Names for Spaces, and apps that open on one.
+lily label 2 web
+# lily rule space web Safari --follow
+
+# A terminal at hand on every Space.
+lily scratchpad term Terminal
+lily bind 'alt - s : lily scratchpad toggle term'
+
+# Halves and quarters on a grid.
+lily bind 'alt + cmd - left : lily grid 1:2:0:0:1:1'
+lily bind 'alt + cmd - right : lily grid 1:2:1:0:1:1'
